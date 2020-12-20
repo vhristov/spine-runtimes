@@ -127,8 +127,10 @@ namespace Spine.Unity.Editor {
 				// variable is used to prevent any redundant create operations.
 				if (!AssetDatabase.IsValidFolder("Assets/Editor") && Interlocked.Exchange(ref wasPreferencesDirCreated, 1) == 0)
 					AssetDatabase.CreateFolder("Assets", "Editor");
-				if (Interlocked.Exchange(ref wasPreferencesAssetCreated, 1) == 0)
+				if (Interlocked.Exchange(ref wasPreferencesAssetCreated, 1) == 0) {
 					AssetDatabase.CreateAsset(settings, SPINE_SETTINGS_ASSET_PATH);
+					AssetDatabase.SaveAssets();
+				}
 			}
 			return settings;
 		}
